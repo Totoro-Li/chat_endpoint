@@ -8,6 +8,13 @@ export const endpoint = 'https://api.openai.com/v1/chat/completions';
 
 const app = express();
 app.use(express.json());
+// Add CORS headers
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://pkucs.top');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
 // Route for POST requests with text message
 app.post("/chat", async (req, res) => {
@@ -40,8 +47,7 @@ app.post("/chat", async (req, res) => {
             }),
         });
 
-        if (!response.ok)
-        {
+        if (!response.ok) {
             throw new Error(await response.text());
         }
 
