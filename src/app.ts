@@ -16,6 +16,7 @@ app.post("/chat", async (req, res) => {
         const model = req.body.model;
         const messages: MessageInterface[] = req.body.messages;
 
+        console.log(req.body);
         // Config options for OpenAI API request
         const config: ConfigInterface = {
             temperature: req.body.temperature || 0.9,
